@@ -1667,22 +1667,92 @@ olcAuthzRegexp: uid=(.*),cn=GSSAPI,cn=auth uid=$1,ou=people,dc=example,dc=com</s
   </sect2>
  </sect1>
 
-<!-- FIXME: Get this dun! - sknorr, 2017-02-01 -->
-<!-- <sect1 xml:id="sec.security.kerberos.yast.client">
-   <title>Setting up Kerberos</title>
+ <sect1 xml:id="sec.security.kerberos.yast.client">
+  <title>Setting up Kerberos using <guimenu>LDAP and Kerberos Client</guimenu></title>
+  <para>
+   &yast; includes the module <guimenu>LDAP and Kerberos Client</guimenu>
+   that helps define authentication scenarios involving either LDAP or Kerberos.
+  </para>
+  <para>
+   It can also be used to join Kerberos and LDAP separately. However, in
+   many such cases, using this module may not be the first choice, such as
+   for joining &ad; (which uses a combination of LDAP and Kerberos). For
+   more information, see <xref linkend="sec.security.auth.yast.client"/>.
+  </para>
+  <para>
+   Start the module by selecting
+   <menuchoice> <guimenu>Network Services</guimenu> <guimenu>LDAP and
+   Kerberos Client</guimenu> </menuchoice>.
+  </para>
+  <figure xml:id="fig.yast2.ldapkerberos.kerberos">
+   <title><guimenu>LDAP and Kerberos Client</guimenu> Window</title>
+   <mediaobject>
+    <imageobject role="html">
+     <imagedata fileref="yast2_auth_client_config.png" width="65%" format="PNG"/>
+    </imageobject>
+    <imageobject role="fo">
+     <imagedata fileref="yast2_auth_client_config.png" width="65%" format="PNG"/>
+    </imageobject>
+   </mediaobject>
+  </figure>
 
-   <figure xml:id="fig.yast2.auth.client.new_domain.ldap_krb5">
-    <title><guimenu>LDAP and Kerberos Client</guimenu>: Kerberos</title>
-    <mediaobject>
-     <imageobject role="html">
-      <imagedata fileref="yast2_auth_client_krb5.png" width="65%" format="PNG"/>
-     </imageobject>
-     <imageobject role="fo">
-      <imagedata fileref="yast2_auth_client_krb5.png" width="65%" format="PNG"/>
-     </imageobject>
-    </mediaobject>
-   </figure>
-</sect1>-->
+  <para>
+   To configure a Kerberos client, follow the procedure below:
+  </para>
+  <procedure xml:id="pro.security.auth.kerberos">
+   <step>
+    <para>
+     In the window <guimenu>LDAP and Kerberos Client</guimenu>, click
+     <guimenu>Change Settings</guimenu>.
+    </para>
+    <para>
+     Choose the tab <guimenu>Authentication via Kerberos</guimenu>.
+    </para>
+    <informalfigure>
+     <mediaobject>
+      <imageobject role="html">
+       <imagedata fileref="yast2_auth_client_krb5.png" width="65%" format="PNG"/>
+      </imageobject>
+      <imageobject role="fo">
+       <imagedata fileref="yast2_auth_client_krb5.png" width="65%" format="PNG"/>
+      </imageobject>
+     </mediaobject>
+    </informalfigure>
+   </step>
+   <step>
+    <para>
+     Click <guimenu>Add Realm</guimenu>.
+    </para>
+   </step>
+   <step>
+    <para>
+     In the appearing dialog, specify the correct
+     <guimenu>Realm name</guimenu>. Usually, the realm name is an uppercase
+     version of the domain name. Additionally, you can specify the following:
+    </para>
+    <itemizedlist>
+     <listitem>
+      <para>
+       To apply mappings from the realm name to the domain name, activate
+       <guimenu>Map Domain Name to the Realm</guimenu> and/or
+       <guimenu>Map Wildcard Domain Name to the Realm</guimenu>.
+      </para>
+      <!-- FIXME: I enter a realm name not a domain name, but the mapping is
+      supposedly the other way around. I guess it does not matter much and
+      the UI string is structured just the way the config is:
+      https://web.mit.edu/kerberos/krb5-1.5/krb5-1.5.4/doc/krb5-admin/domain_005frealm.html
+      - sknorr, 2017-05-19 -->
+     </listitem>
+     <listitem>
+      <para>
+       The <guimenu>Host Name of Administration Server</guimenu> and the
+       <guimenu>Host Name of Master Key Distribution Server</guimenu>
+      </para>
+     </listitem>
+    </itemizedlist>
+   </step>
+  </procedure>
+ </sect1>
 
  <sect1 xml:id="sec.security.kerberos.info">
   <title>For More Information</title>
@@ -1694,23 +1764,18 @@ olcAuthzRegexp: uid=(.*),cn=GSSAPI,cn=auth uid=$1,ou=people,dc=example,dc=com</s
    installation, user, and administration guides.
   </para>
 
-
- <!--ke 2016-08-23:  daps linkcheck reported following link(s) as
-     broken-->
- <!-- <link xlink:href="ftp://athena-dist.mit.edu/pub/kerberos/doc/usenix.PS"/> -->
+ <!-- Paper is from 1995, not sure whether it is a good idea to link it
+ again. The official homepage has a section "How Kerberos Works" too. -
+ sknorr, 2017-05-19 -->
  <!-- <para>
    The paper at
-   <link xlink:href="ftp://athena-dist.mit.edu/pub/kerberos/doc/usenix.PS"/>
+   <link xlink:href="https://www.usenix.org/publications/library/proceedings/ec95/full_papers/davis.ps"/>
    gives quite an extensive insight to the basic principles of Kerberos,
    without being too difficult to read. It also provides a lot of
    opportunities for further investigation and reading about Kerberos.
   </para>-->
 
   <para>
-<!--taroth 2014-08-29:  daps linkcheck reported following link(s) as
-   broken-->
-<!--  The official Kerberos FAQ is available at
-   <ulink url="http://www.nrl.navy.mil/CCS/people/kenh/kerberos-faq.html"/>.-->
    The book <emphasis>Kerberos&mdash;A Network Authentication
    System</emphasis> by Brian Tung (ISBN 0-201-37924-4) offers extensive
    information.
